@@ -28,7 +28,7 @@ for i in range(6):
         title = title_tag.text
         title = re.compile('[^가-힣 ]').sub(' ', title)       # 제목에서 한글만 남기기 ^:반전, sub:빼고 그 자리를 ' '로 넣어라.
         titles.append(title)                           # 제목들만 골라서 뽑아 리스트 안에 넣는다.
-    df_section_titles = pd.DataFrame(titles, columns=['titles'])                    # 뉴스제목과 카테고리 지정해주는 데이터프레임 만들기
+    df_section_titles = pd.DataFrame(titles, columns=['title'])                    # 뉴스제목과 카테고리 지정해주는 데이터프레임 만들기
     df_section_titles['category'] = category[i]
     df_titles = pd.concat([df_titles, df_section_titles], axis='rows', ignore_index=True)
 print(df_titles)

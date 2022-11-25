@@ -17,7 +17,7 @@ df_title = pd.DataFrame()
 
 for i in range(0, 6):                # category
     titles = []
-    for j in range(1, 11):     # pages
+    for j in range(1, pages[i]):     # pages (1, page[i])
         url = 'https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=10{}#&date=%2000:00:00&page={}'.format(i, j)
         driver.get(url)
         time.sleep(0.2)
