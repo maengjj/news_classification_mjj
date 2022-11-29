@@ -14,8 +14,8 @@ driver.maximize_window() # 전체장
 time.sleep(1) # 2초 지연
 
 
-place = ['신림동길 14'] # , '역삼로7길 16'
-category = ['1인분 주문', '프렌차이즈', '치킨', '피자/양식', '중국집', '한식', '일식/돈까스',
+place = ['신림동길 14', '역삼로7길 16']
+category = ['1인분 주문', '프랜차이즈', '치킨', '피자/양식', '중국집', '한식', '일식/돈까스',
             '족발/보쌈', '야식', '분식', '카페/디저트']
 
 df_restaurant = pd.DataFrame()
@@ -28,7 +28,7 @@ for i in place:
     time.sleep(1)
 
     # 검색창 입력
-    #value = input("지역을 입력하세요")
+    # value = input("지역을 입력하세요")
     element.send_keys(i)
     time.sleep(1)
 
@@ -73,37 +73,21 @@ for i in place:
             restaurant_name = re.compile('[^가-힣A-Za-z0-9- ]').sub(' ', restaurant_name)
             restaurant_name = restaurant_name.split('-')
             result_lists.append(restaurant_name[0])  # 업체명
-        time.sleep(1)
+
 
         # 데이터 프레임 만들기(업체명과 카테고리 지정)
         df_section_titles = pd.DataFrame(result_lists, columns=['restaurant_name'])
         df_section_titles['category'] = category[j]
         df_restaurant = pd.concat([df_restaurant, df_section_titles], axis='rows', ignore_index=True)
 
-
+        # csv 파일형태로 저장
         df_restaurant.to_csv('./island_team_models/crawling_data.csv', index=False)
 
     time.sleep(1)
 
-
-# # 페이지 소스 출력
-# html = driver.page_source
-# html_source = BeautifulSoup(html, 'html.parser')
-#
-# # 데이터 추출
-# restaurant_name = html_source.find_all("div", class_ = "restaurant-name ng-binding") #업체명
-# result_list = []
-# result_list = df.DataFrame
-#
-# #데이터 배열
-# for i in restaurant_name :
-#     result_list.append(i.string) # 업체명
-# time.sleep(1)
-
-
 driver.close() # 크롬드라이버 종료
+
 
 print(df_restaurant)
 print(df_restaurant.category.value_counts())
-
 print(df_restaurant.head(20))

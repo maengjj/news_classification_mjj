@@ -35,10 +35,10 @@ for i in range(0, 6):                # category
                     titles.append(title)
                 except:
                     print('error', i, j, k, l)
-        if j % 10 == 0:                 # 오류가 났을때 데이터가 날라갈 위험이 있기 때문에 중간중간 저장을 해준다.
-            df_section_title = pd.DataFrame(titles, columns=['titles'])
-            df_section_title['category'] = category[i]
-            df_title = pd.concat([df_title, df_section_title], ignore_index=True)
-            df_title.to_csv('./crawling_data/crawling_data_{}_{}.csv'.format(category[i], j), index=False)
-            titles = []
+            if j % 10 == 0:                 # 오류가 났을때 데이터가 날라갈 위험이 있기 때문에 중간중간 저장을 해준다.
+                df_section_title = pd.DataFrame(titles, columns=['titles'])
+                df_section_title['category'] = category[i]
+                df_title = pd.concat([df_title, df_section_title], ignore_index=True)
+                df_title.to_csv('./crawling_data/crawling_data_{}_{}.csv'.format(category[i], j), index=False)
+                titles = []
 
