@@ -62,6 +62,3 @@ print(df['OX'].value_counts())
 print(df['OX'].mean())
 print(df.loc[df['OX']==False])
 
-
-
-
